@@ -31,7 +31,7 @@ all_x_values = [x * round(hd) + TL_CORNER[0] for x in range(0, GO_BOARD_SIZE)]
 all_y_values = [y * round(vd) + TL_CORNER[1] for y in range(0, GO_BOARD_SIZE)]
 all_coordinates = [[x,y] for x in all_x_values for y in all_y_values]
 
-for count in range(1, 51):
+for count in range(1, 52):
     path_to_image = rf"C:\Users\nharw\Desktop\Extra folder of puzzles\Eric {count} 2023-02-11.png" # CHANGED FROM STORED SCREENSHOTS FOLDER
     # r"C:\Users\nharw\Desktop\Screenshot Project\Stored Screenshots\Eric 5 2023-02-11.png"
     img = cv2.imread(path_to_image, -1)
@@ -45,7 +45,7 @@ for count in range(1, 51):
     print("---------------------")
     print(f"Puzzle Number: {count}")
     for num in range(-10, 12):
-        num_or_circle = [[x, y] for x, y in location_of_black_stones if img[y+num, x+num, 0] > 200]
+        num_or_circle = [[x, y] for x, y in location_of_black_stones if img[y+num, x+abs(num), 0] > 200] # change from > 200
         if num_or_circle != []:
             print(num_or_circle)
             print("Has white on black stone")
@@ -53,7 +53,7 @@ for count in range(1, 51):
             break
 
     for num in range(-10, 12):
-        num_or_circle = [[x, y] for x, y in location_of_white_stones if img[y+num, x+num, 0] < 50]
+        num_or_circle = [[x, y] for x, y in location_of_white_stones if img[y+num, x+abs(num), 0] < 50]  # change from < 50
 
         if num_or_circle != []:
             print(num_or_circle)
